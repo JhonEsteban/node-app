@@ -1,4 +1,5 @@
 const express = require('express');
+const connectToDB = require('./database');
 
 require('dotenv').config();
 
@@ -8,6 +9,9 @@ const port = process.env.PORT || 3001;
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Database
+connectToDB();
 
 // Routes
 app.get('/', (req, res) => {
