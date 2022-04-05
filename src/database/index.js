@@ -1,17 +1,15 @@
 const mongoose = require('mongoose');
 
 const connectToDB = async () => {
-  const uriBase = 'mongodb://localhost:27017';
-  const dbName = process.env.DB_NAME;
+  const query = process.env.MONGO_QUERY;
 
   try {
-    await mongoose.connect(`${uriBase}/${dbName}`);
+    await mongoose.connect(query);
 
     console.log('Conexion exitosa a la DB!!');
   } catch (error) {
     console.log('Error al conectarse a la DB :-(');
-
-    return error;
+    console.log(error);
   }
 };
 
