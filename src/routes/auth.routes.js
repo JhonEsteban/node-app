@@ -1,16 +1,15 @@
 const { Router } = require('express');
-
 const { check } = require('express-validator');
 
+const {
+  validateFields,
+  validateEmailRepeated,
+  encryptPassword,
+  validateEmailExists,
+  validatePasswordExists,
+} = require('../middlewares');
+
 const { register, login } = require('../controllers/auth.controller');
-
-const validateFields = require('../middlewares/validateFields');
-
-const validateEmailRepeated = require('../middlewares/email/validateEmailRepeated');
-const encryptPassword = require('../middlewares/password/encryptPassword');
-
-const validateEmailExists = require('../middlewares/email/validateEmailExists');
-const validatePasswordExists = require('../middlewares/password/validatePasswordExists');
 
 const router = Router();
 

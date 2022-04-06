@@ -4,10 +4,14 @@ const bcrypt = require('bcryptjs');
 const encryptPassword = async (req = request, res = response, next) => {
   const { password } = req.body;
 
-  const salt = await bcrypt.genSalt(10);
-  req.body.password = await bcrypt.hash(password, salt);
+  try {
+    const salt = await bcrypt.genSalt(10);
+    req.body.password = await bcrypt.hash(password, salt);
 
-  next();
+    next();
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
 module.exports = encryptPassword;
