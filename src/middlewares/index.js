@@ -6,6 +6,8 @@ const validateOldPassword = require('./password/validateOldPassword');
 const encryptPassword = require('./password/encryptPassword');
 const encryptNewPassword = require('./password/encryptNewPassword');
 const validateToken = require('./validateToken');
+const validateTaskId = require('./task/validateTaskId');
+const validateTaskExists = require('./task/validateTaskExists');
 
 module.exports = {
   validateFields,
@@ -16,4 +18,6 @@ module.exports = {
   encryptPassword,
   encryptNewPassword,
   validateToken,
+  validateTaskId,
+  validateTaskExists,
 };
