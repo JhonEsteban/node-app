@@ -7,7 +7,7 @@ Backend creado con Node que posee una autenticación por token (jwt) y operacion
 1. Clonar el repositorio
 
 ```
-git clone https://github.com/JhonEsteban/node-app.git
+git clone https://github.com/JhonEsteban/task-node-app.git
 ```
 
 2. Instalar los módulos de node

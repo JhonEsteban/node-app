@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const {
+  validateToken,
   validateFields,
   validateEmailRepeated,
   encryptPassword,
@@ -9,9 +10,15 @@ const {
   validatePasswordExists,
 } = require('../middlewares');
 
-const { register, login } = require('../controllers/auth.controller');
+const {
+  register,
+  login,
+  verifyAndRenewToken,
+} = require('../controllers/auth.controller');
 
 const router = Router();
+
+router.get('/renewToken', validateToken, verifyAndRenewToken);
 
 router.post(
   '/register',

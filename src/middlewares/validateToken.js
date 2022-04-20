@@ -13,10 +13,10 @@ const validateToken = (req = request, res = response, next) => {
     }
 
     const authorizationArr = authorization.split(' ');
-    const bearer = authorizationArr[0];
+    const isBearerStr = authorizationArr[0] === 'Bearer';
     const token = authorizationArr[1];
 
-    if (!bearer || !token || authorizationArr.length > 2) {
+    if (!isBearerStr || !token || authorizationArr.length > 2) {
       return res.status(400).json({
         message: 'Token de sesión no válido',
       });

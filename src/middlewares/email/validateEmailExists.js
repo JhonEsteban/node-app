@@ -9,7 +9,7 @@ const validateEmailExists = async (req = request, res = response, next) => {
 
   if (!emailExist) {
     return res.status(400).json({
-      message: 'Correcto electronico no es valido',
+      message: 'Correcto electronico no valido',
     });
   }
 

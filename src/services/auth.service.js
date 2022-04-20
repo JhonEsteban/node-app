@@ -7,16 +7,44 @@ class AuthService {
     const newUser = new User(userData);
     await newUser.save();
 
-    const userId = newUser._id;
+    const { _id, name, email, profileImg } = newUser;
 
-    return await generateToken(userId);
+    return {
+      token: await generateToken(_id),
+      user: {
+        name,
+        email,
+        profileImg,
+      },
+    };
   }
 
-  async loginUser({ email }) {
-    const dbUser = await User.findOne({ email });
-    const userId = dbUser._id;
+  async loginUser(userData) {
+    const { _id, name, email, profileImg } = await User.findOne({
+      email: userData.email,
+    });
 
-    return await generateToken(userId);
+    return {
+      token: await generateToken(_id),
+      user: {
+        name,
+        email,
+        profileImg,
+      },
+    };
+  }
+
+  async loginUserById(userId) {
+    const { name, email, profileImg } = await User.findById(userId);
+
+    return {
+      token: await generateToken(userId),
+      user: {
+        name,
+        email,
+        profileImg,
+      },
+    };
   }
 }
 

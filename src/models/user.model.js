@@ -10,6 +10,10 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  profileImg: {
+    type: String,
+    default: 'https://i.imgur.com/6hAGxS5.png',
+  },
   password: {
     type: String,
     required: true,
