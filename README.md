@@ -22,6 +22,10 @@ npm install
 PORT=
 MONGO_QUERY=
 JWT_SECRET=
+APP_EMAIL=
+APP_PASSWORD=
+PASSWORD_LINK_BASE=
+PASSWORD_LINK_ENDPOINT=
 ```
 
 4. Iniciar el servidor de desarrollo

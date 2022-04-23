@@ -14,6 +14,8 @@ const {
   register,
   login,
   verifyAndRenewToken,
+  forgotMyPassword,
+  changeAuthPassword,
 } = require('../controllers/auth.controller');
 
 const router = Router();
@@ -47,6 +49,16 @@ router.post(
     validatePasswordExists,
   ],
   login
+);
+
+router.post(
+  '/forgot-password',
+  [
+    check('email', 'El correo eléctronico es requerido').isEmail(),
+    validateFields,
+    validateEmailExists,
+  ],
+  forgotMyPassword
 );
 
 module.exports = router;

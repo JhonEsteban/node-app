@@ -1,6 +1,10 @@
 const User = require('../models/user.model');
 
 class UserService {
+  async getUserByEmail(email) {
+    return await User.findOne({ email });
+  }
+
   async updateName(userId, name) {
     await User.findByIdAndUpdate(userId, { name });
   }

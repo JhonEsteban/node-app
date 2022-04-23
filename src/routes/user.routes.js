@@ -6,6 +6,7 @@ const router = Router();
 const {
   validateFields,
   validateToken,
+  validateTokenByParams,
   validateOldPassword,
   encryptNewPassword,
 } = require('../middlewares');
@@ -40,6 +41,20 @@ router.put(
     ).isLength({ min: 6 }),
     validateFields,
     validateOldPassword,
+    encryptNewPassword,
+  ],
+  updateUserPasswordById
+);
+
+router.put(
+  '/:token/change-password',
+  [
+    validateTokenByParams,
+    check(
+      'newPassword',
+      'La nueva contraseña debe ser de minimo 6 carácteres'
+    ).isLength({ min: 6 }),
+    validateFields,
     encryptNewPassword,
   ],
   updateUserPasswordById
