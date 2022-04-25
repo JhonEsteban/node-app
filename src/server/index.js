@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const connectToDB = require('../database');
 
@@ -15,6 +16,11 @@ class Server {
     this.app = express();
     this.apiBase = '/api/v1';
     this.port = process.env.PORT || 3000;
+
+    this.fileUploadConfig = {
+      useTempFiles: true,
+      tempFileDir: '/tmp/',
+    };
 
     this.setMiddlewares();
     this.setRoutes();
@@ -38,6 +44,7 @@ class Server {
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(fileUpload(this.fileUploadConfig));
   }
 
   setRoutes() {

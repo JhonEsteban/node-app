@@ -7,20 +7,20 @@ class AuthService {
     const newUser = new User(userData);
     await newUser.save();
 
-    const { _id, name, email, profileImg } = newUser;
+    const { _id, name, email, image } = newUser;
 
     return {
       token: await generateToken(_id),
       user: {
         name,
         email,
-        profileImg,
+        image,
       },
     };
   }
 
   async loginUser(userData) {
-    const { _id, name, email, profileImg } = await User.findOne({
+    const { _id, name, email, image } = await User.findOne({
       email: userData.email,
     });
 
@@ -29,20 +29,20 @@ class AuthService {
       user: {
         name,
         email,
-        profileImg,
+        image,
       },
     };
   }
 
   async loginUserById(userId) {
-    const { name, email, profileImg } = await User.findById(userId);
+    const { name, email, image } = await User.findById(userId);
 
     return {
       token: await generateToken(userId),
       user: {
         name,
         email,
-        profileImg,
+        image,
       },
     };
   }

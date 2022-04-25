@@ -9,15 +9,19 @@ const {
   validateTokenByParams,
   validateOldPassword,
   encryptNewPassword,
+  validateUserImage,
+  validateImageExtension,
+  deletePreviousUserImage,
 } = require('../middlewares');
 
 const {
   updateUserNameById,
   updateUserPasswordById,
+  updateUserImageById,
 } = require('../controllers/user.controller');
 
 router.put(
-  '/:id/update-name',
+  '/update-name',
   [
     validateToken,
     check('name', 'El nombre es requerido').not().isEmpty(),
@@ -28,7 +32,7 @@ router.put(
 );
 
 router.put(
-  '/:id/update-password',
+  '/update-password',
   [
     validateToken,
     check(
@@ -58,6 +62,17 @@ router.put(
     encryptNewPassword,
   ],
   updateUserPasswordById
+);
+
+router.put(
+  '/update-image',
+  [
+    validateToken,
+    validateUserImage,
+    validateImageExtension,
+    deletePreviousUserImage,
+  ],
+  updateUserImageById
 );
 
 module.exports = router;

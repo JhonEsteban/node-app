@@ -14,6 +14,10 @@ const validateTokenByParams = require('./jwt/validateTokenByParams');
 const validateTaskId = require('./task/validateTaskId');
 const validateTaskExists = require('./task/validateTaskExists');
 
+const validateUserImage = require('./userImage/validateUserImage');
+const validateImageExtension = require('./userImage/validateImageExtension');
+const deletePreviousUserImage = require('./userImage/deletePreviousUserImage');
+
 module.exports = {
   validateFields,
   validateEmailExists,
@@ -26,4 +30,7 @@ module.exports = {
   validateTokenByParams,
   validateTaskId,
   validateTaskExists,
+  validateUserImage,
+  validateImageExtension,
+  deletePreviousUserImage,
 };

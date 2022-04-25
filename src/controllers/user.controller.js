@@ -1,6 +1,7 @@
 const { request, response } = require('express');
 
 const UserService = require('../services/user.service');
+const CloudinaryService = require('../services/cloudinary.service');
 
 const userService = new UserService();
 
@@ -34,7 +35,27 @@ const updateUserPasswordById = async (req = request, res = response) => {
   }
 };
 
+const updateUserImageById = async (req = request, res = response) => {
+  const { userId } = req;
+  const { files } = req;
+
+  const cloudinaryService = new CloudinaryService();
+
+  try {
+    const { newImage } = files;
+
+    const { secure_url } = await cloudinaryService.saveUserImage(newImage);
+    await userService.updateProfileImg(userId, secure_url);
+
+    res.json({ message: 'Imagen de perfil actualiza con éxito' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   updateUserNameById,
   updateUserPasswordById,
+  updateUserImageById,
 };

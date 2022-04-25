@@ -1,5 +1,9 @@
 const { Schema, model } = require('mongoose');
 
+require('dotenv').config();
+
+const defaultUserImage = process.env.DEFAULT_USER_IMAGE;
+
 const userSchema = new Schema({
   name: {
     type: String,
@@ -10,9 +14,9 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
-  profileImg: {
+  image: {
     type: String,
-    default: 'https://i.imgur.com/6hAGxS5.png',
+    default: defaultUserImage,
   },
   password: {
     type: String,
