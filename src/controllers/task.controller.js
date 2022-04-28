@@ -37,10 +37,11 @@ const createTask = async (req = request, res = response) => {
   const { userId } = req;
 
   try {
-    await taskService.createTask({ ...req.body, userId });
+    const task = await taskService.createTask({ ...req.body, userId });
 
     res.json({
       message: 'Tarea creada con éxito',
+      task,
     });
   } catch (error) {
     res.status(500).json({ error });
@@ -52,10 +53,11 @@ const updateTaskById = async (req = request, res = response) => {
   const { userId } = req;
 
   try {
-    await taskService.updateTaskById(id, userId, req.body);
+    const task = await taskService.updateTaskById(id, userId, req.body);
 
     res.json({
       message: 'Tarea actualizada con éxito',
+      task,
     });
   } catch (error) {
     res.status(500).json({ error });
