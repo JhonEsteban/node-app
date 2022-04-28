@@ -77,10 +77,25 @@ const deleteTaskById = async (req = request, res = response) => {
   }
 };
 
+const deleteAllTasks = async (req = request, res = response) => {
+  const { userId } = req;
+
+  try {
+    await taskService.deleteAllTasks(userId);
+
+    res.json({
+      message: 'Tareas eliminadas con éxito',
+    });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
   createTask,
   updateTaskById,
   deleteTaskById,
+  deleteAllTasks,
 };

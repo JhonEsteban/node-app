@@ -14,6 +14,7 @@ const {
   createTask,
   updateTaskById,
   deleteTaskById,
+  deleteAllTasks,
 } = require('../controllers/task.controller');
 
 const router = Router();
@@ -55,5 +56,7 @@ router.delete(
   [validateToken, validateTaskId, validateTaskExists],
   deleteTaskById
 );
+
+router.delete('/', [validateToken], deleteAllTasks);
 
 module.exports = router;
