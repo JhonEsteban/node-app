@@ -10,10 +10,11 @@ const updateUserNameById = async (req = request, res = response) => {
   const { name } = req.body;
 
   try {
-    await userService.updateName(userId, name);
+    const newName = await userService.updateName(userId, name);
 
     res.json({
       message: 'Nombre actualizado con éxito',
+      name: newName,
     });
   } catch (error) {
     res.status(500).json(error);
@@ -45,11 +46,13 @@ const updateUserImageById = async (req = request, res = response) => {
     const { newImage } = files;
 
     const { secure_url } = await cloudinaryService.saveUserImage(newImage);
-    await userService.updateProfileImg(userId, secure_url);
+    const image = await userService.updateProfileImg(userId, secure_url);
 
-    res.json({ message: 'Imagen de perfil actualiza con éxito' });
+    res.json({
+      message: 'Imagen de perfil actualiza con éxito',
+      image,
+    });
   } catch (error) {
-    console.log(error);
     res.status(500).json(error);
   }
 };

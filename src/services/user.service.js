@@ -10,8 +10,14 @@ class UserService {
     return image;
   }
 
-  async updateName(userId, name) {
-    await User.findByIdAndUpdate(userId, { name });
+  async updateName(userId, newName) {
+    const { name } = await User.findByIdAndUpdate(
+      userId,
+      { name: newName },
+      { new: true }
+    );
+
+    return name;
   }
 
   async updatePassword(userId, newPassword) {
@@ -19,7 +25,13 @@ class UserService {
   }
 
   async updateProfileImg(userId, newImage) {
-    await User.findByIdAndUpdate(userId, { image: newImage });
+    const { image } = await User.findByIdAndUpdate(
+      userId,
+      { image: newImage },
+      { new: true }
+    );
+
+    return image;
   }
 }
 
